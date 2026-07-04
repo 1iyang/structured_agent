@@ -1,0 +1,53 @@
+{
+  "task_id": "bug-reretrieval-demo-001",
+  "title": "Truncated JSON recovery still fails after the first fallback path",
+  "description": "Requests with a truncated JSON body still fail after the request handler catches the parser error. The initial triage pool mostly points at the handler and parser wrapper, but the shared recovery helper may own the final failure path.",
+  "expected_behavior": "The workflow should reopen retrieval once, compress the refreshed evidence, and land on the shared helper as the primary file.",
+  "log_excerpt": "ParseError raised after fallback path. handler catches the parse error but recover_truncated_json still rethrows.",
+  "stacktrace_excerpt": "Traceback excerpt: in recover_truncated_json at app/utils.py",
+  "repo_subpaths": [],
+  "repository_artifacts": [
+    {
+      "path": "app/request/handler.py",
+      "snippet": "handler catches ParseError and calls the fallback recovery path before returning a 400 response",
+      "tags": [
+        "local_repo_search",
+        "handler"
+      ]
+    },
+    {
+      "path": "app/parsing/json_tail.py",
+      "snippet": "json tail wrapper normalizes parser exceptions before handing them back to the request layer",
+      "tags": [
+        "local_repo_search",
+        "parser"
+      ]
+    }
+  ],
+  "followup_repository_artifacts": [
+    {
+      "path": "app/utils.py",
+      "snippet": "recover_truncated_json shared helper repairs truncated payloads and controls the final retry behavior",
+      "tags": [
+        "local_repo_search",
+        "shared_helper"
+      ]
+    },
+    {
+      "path": "app/request/handler.py",
+      "snippet": "handler delegates the final retry decision to recover_truncated_json",
+      "tags": [
+        "local_repo_search",
+        "handler"
+      ]
+    },
+    {
+      "path": "app/parsing/json_tail.py",
+      "snippet": "json tail parser wrapper still surfaces the initial ParseError context",
+      "tags": [
+        "local_repo_search",
+        "parser"
+      ]
+    }
+  ]
+}

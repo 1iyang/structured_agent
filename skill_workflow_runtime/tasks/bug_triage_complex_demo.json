@@ -1,0 +1,27 @@
+{
+  "issue_id": "bug-labeled-demo-002",
+  "title": "Recovery step keeps selecting the runtime callsite instead of the JSON helper",
+  "description": "The triage summary keeps blaming the outer runtime callsite even when the actual malformed tail handling happens inside the shared JSON helper.",
+  "expected_behavior": "Candidate screening should preserve the helper path strongly enough that the final triage decision can keep it as the primary file.",
+  "log_excerpt": "JSONDecodeError: Extra data after truncated JSON payload",
+  "stacktrace_excerpt": "File \"app/engine.py\", line 91, in generate_json\n  repaired = safe_json_tail(raw_text)\nFile \"app/utils.py\", line 188, in safe_json_tail\n  raise JSONDecodeError(...)",
+  "repository_artifacts": [
+    {
+      "path": "app/engine.py",
+      "snippet": "generate_json delegates repair and fallback handling to safe_json_tail before returning the structured response.",
+      "tags": ["runtime", "json", "callsite"]
+    },
+    {
+      "path": "app/utils.py",
+      "snippet": "safe_json_tail clips malformed JSON output, strips dangling fragments, and retries parsing on the retained prefix.",
+      "tags": ["json", "helper", "recovery"]
+    },
+    {
+      "path": "app/reporting.py",
+      "snippet": "reporting utilities only consume the already repaired output and summarize workflow traces.",
+      "tags": ["report", "summary"]
+    }
+  ],
+  "gold_primary_file": "app/utils.py",
+  "gold_root_cause_category": "error_recovery"
+}

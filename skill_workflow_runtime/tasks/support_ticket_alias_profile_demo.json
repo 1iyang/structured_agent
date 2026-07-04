@@ -1,0 +1,6 @@
+{
+  "request_id": "support-alias-001",
+  "user_message": "Hi team, I was charged twice for the same annual renewal and need help fixing it.",
+  "metadata_context": "Account tier: annual self-serve. Last invoice posted yesterday. No previous refund on this renewal.",
+  "policy_text": "Frontline can approve a standard refund for duplicate settled charges when the account shows no prior refund on the same invoice."
+}

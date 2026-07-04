@@ -1,0 +1,66 @@
+[
+  {
+    "ticket_id": "damaged-headphones-replacement",
+    "customer_message": "Hi, my QuietWave X headphones arrived yesterday with the left ear cup cracked right out of the box. I want a replacement as soon as possible because I need them for travel next week.",
+    "account_context": "Order QW-18422 delivered 2 days ago. Product status: delivered. Warranty active. No prior claims on this order.",
+    "source_pack": "Policy excerpt: Items reported as damaged within 7 days of delivery are eligible for replacement or full refund after basic proof of damage is provided. Policy excerpt: Replacements for in-stock electronics can be created immediately once damage is confirmed. Account note: The QuietWave X order was delivered 2 days ago and has not been refunded or replaced before. FAQ fragment: Support should request one or two photos when the packaging or product arrives damaged. Prior guidance: When a customer has urgent travel, teams may prioritize replacement over refund if inventory is available, but should not promise expedited shipping unless the shipping option is confirmed. Inventory note: QuietWave X is currently in stock in the standard warehouse. Policy reminder: Support should acknowledge inconvenience and state the next operational step clearly.",
+    "reference_answer": {
+      "issue_type": "damaged_item",
+      "eligibility_decision": "approved",
+      "resolution_category": "replacement",
+      "escalation_needed": false,
+      "key_policy_points": [
+        "Items reported as damaged within 7 days of delivery are eligible for replacement or full refund after proof of damage is provided.",
+        "Support should request photos for damage confirmation.",
+        "Replacement can proceed when the item is in stock."
+      ],
+      "key_policy_labels": [
+        "standard_remedy_available",
+        "customer_proof_required"
+      ]
+    }
+  },
+  {
+    "ticket_id": "annual-plan-refund-after-renewal",
+    "customer_message": "I was just charged for another year of the Pro plan and I want the renewal canceled and refunded. I did not use the service after the renewal email.",
+    "account_context": "Subscription renewed 3 days ago. Usage since renewal: 0 sessions. Previous plan changes: none in the last year.",
+    "source_pack": "Billing policy: Annual plan renewals are refundable within 7 days if no post-renewal usage occurred. Billing policy: Once material usage occurs after renewal, only a prorated credit exception may be considered by billing specialists. Account note: The account renewed 3 days ago and has zero recorded sessions since renewal. FAQ fragment: Customers asking for immediate cancellation and refund within the grace window do not require manager escalation if eligibility is clear. Prior support example: Confirm the refund timeline, clarify that access ends when the refund is processed, and avoid promising an instant bank posting. Compliance note: Support should mention that bank settlement timing may vary by payment method.",
+    "reference_answer": {
+      "issue_type": "billing_refund",
+      "eligibility_decision": "approved",
+      "resolution_category": "refund",
+      "escalation_needed": false,
+      "key_policy_points": [
+        "Annual renewals are refundable within 7 days when there has been no post-renewal usage.",
+        "Zero recorded usage keeps the request inside the clear approval path.",
+        "Support should explain the refund timeline without promising instant bank posting."
+      ],
+      "key_policy_labels": [
+        "standard_remedy_available",
+        "timing_or_posting_uncertain"
+      ]
+    }
+  },
+  {
+    "ticket_id": "account-access-missing-verification",
+    "customer_message": "I can no longer get into my account because the old work email is gone and the reset link never reaches me. I need access restored, but I cannot log in to upload anything right now.",
+    "account_context": "Login attempts from recognized IP range. Email on file belongs to deactivated corporate domain. No recent successful login. Security tier: standard business account.",
+    "source_pack": "Security policy: Email-change or account-recovery requests require either verified ownership signals or manual security review. Security policy: Support may collect billing address, recent invoice amount, and last successful login window as lightweight verification for standard business accounts. Security policy: Direct email change without verification is not permitted. FAQ fragment: If the customer cannot access the old email, support should explain the verification path and avoid implying that access can be restored immediately. Prior guidance: Escalate to the account-recovery queue when a customer lacks the required verification artifacts during the first contact. Account note: No recent successful login is present, and the old domain has been deactivated.",
+    "reference_answer": {
+      "issue_type": "account_access",
+      "eligibility_decision": "needs_info",
+      "resolution_category": "account_recovery",
+      "escalation_needed": true,
+      "key_policy_points": [
+        "Account recovery requires ownership verification or manual security review.",
+        "Direct email change without verification is not allowed.",
+        "The support response should explain the exact verification path."
+      ],
+      "key_policy_labels": [
+        "identity_verification_required",
+        "frontline_permission_limited",
+        "customer_proof_required"
+      ]
+    }
+  }
+]

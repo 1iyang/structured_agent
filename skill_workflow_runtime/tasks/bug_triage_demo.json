@@ -1,0 +1,30 @@
+{
+  "id": "bug-demo-001",
+  "title": "JSON response loses the last object when output is truncated",
+  "description": "When long JSON output reaches the output budget, the runtime returns a partial structure instead of clipping safely at an object boundary.",
+  "expected_behavior": "The runtime should truncate safely and preserve valid JSON semantics for the retained prefix.",
+  "log_excerpt": "ValueError: partial JSON object emitted after truncation",
+  "stacktrace_excerpt": "Traceback ... in generate_json ... in safe_json_tail ... ValueError: partial JSON object emitted after truncation",
+  "repository_artifacts": [
+    {
+      "path": "app/engine.py",
+      "snippet": "generate_json calls safe_json_tail before returning the final response payload.",
+      "tags": ["runtime", "callsite", "json"]
+    },
+    {
+      "path": "app/utils.py",
+      "snippet": "safe_json_tail trims long output and should preserve object boundaries when truncating JSON arrays and objects.",
+      "tags": ["json", "helper", "truncation"]
+    },
+    {
+      "path": "app/state.py",
+      "snippet": "State checkpoint utilities track emitted token counts and completion metadata.",
+      "tags": ["state", "checkpoint"]
+    },
+    {
+      "path": "app/reporting.py",
+      "snippet": "Reporting utilities summarize run metadata for operator dashboards.",
+      "tags": ["report", "summary"]
+    }
+  ]
+}

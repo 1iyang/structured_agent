@@ -1,0 +1,9 @@
+{
+  "bug_id": "bug-alias-001",
+  "issue_title": "JSON output stops mid-object when the response is long",
+  "body": "Users report that long assistant responses produce invalid JSON output and the parser fails during final assembly.",
+  "desired_behavior": "Long responses should still produce valid JSON objects that can be parsed without truncation.",
+  "logs": "ParserError: Unterminated string in JSON payload",
+  "traceback": "Traceback (most recent call last): in assemble_response in json_utils.py",
+  "repository_scope": "skill_workflow_runtime"
+}

@@ -1,0 +1,6 @@
+{
+  "id": "support-demo-002",
+  "customer_message": "I was charged twice for invoice A-9214 and need the duplicate charge refunded. My order ID is A-9214.",
+  "policy_excerpt": "Frontline can approve a standard refund for duplicate settled charges when no prior refund exists on the same invoice.",
+  "order_snapshot": "Order ID A-9214. Duplicate charge settled yesterday. No prior refund or exception on this invoice."
+}

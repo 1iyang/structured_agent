@@ -1,0 +1,6 @@
+{
+  "id": "support-demo-001",
+  "customer_message": "Hi, I was charged again after renewal and I want a refund. This is urgent because I cannot afford the duplicate charge right now. My order ID is A-4812.",
+  "policy_excerpt": "Frontline can approve a standard refund during the renewal grace window. If a charge is still pending, the agent should clarify the posting state before promising a refund. Manager review is only required for non-standard exceptions.",
+  "order_snapshot": "Order ID A-4812. Renewal posted 2 days ago. No manual exception has been granted yet."
+}

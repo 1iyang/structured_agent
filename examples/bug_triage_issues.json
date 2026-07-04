@@ -1,0 +1,67 @@
+[
+  {
+    "issue_id": "json-tail-truncation",
+    "title": "Structured JSON output is sometimes truncated at the tail",
+    "description": "Some structured generations end with a dangling comma or half-written field, and downstream parsing fails instead of recovering conservatively. The failures are intermittent and usually show up after longer generations where the raw text looks almost valid except for the final few characters.",
+    "expected_behavior": "The workflow should either recover a valid JSON prefix or retry cleanly with a larger token budget.",
+    "log_excerpt": "JSONDecodeError near char 3187 while parsing structured output tail",
+    "stacktrace_excerpt": "File \"structured_agent/utils.py\", line 141, in safe_json_loads",
+    "repo_subpaths": [
+      "structured_agent"
+    ],
+    "gold_primary_file": "structured_agent/utils.py",
+    "gold_root_cause_category": "error_recovery",
+    "gold_evidence_labels": [
+      "recovery_logic_gap"
+    ]
+  },
+  {
+    "issue_id": "artifact-reset-overwrites-previous-run",
+    "title": "Need to verify whether stale artifact cleanup can hide previous debugging evidence",
+    "description": "We remove previous artifacts before each run. On successful runs that is fine, but on failed reruns it becomes hard to compare the previous output directory with the current one because cleanup already deleted it. We should triage whether this behavior is localized and explicit enough.",
+    "expected_behavior": "Cleanup should be explicit and localized so it is easy to reason about when previous artifacts are deleted.",
+    "log_excerpt": "reset_run_outputs removed previous artifact directory before failed rerun",
+    "stacktrace_excerpt": "File \"structured_agent/script_utils.py\", line 118, in reset_run_outputs",
+    "repo_subpaths": [
+      "structured_agent",
+      "."
+    ],
+    "gold_primary_file": "structured_agent/script_utils.py",
+    "gold_root_cause_category": "artifact_lifecycle",
+    "gold_evidence_labels": [
+      "lifecycle_scope_error"
+    ]
+  },
+  {
+    "issue_id": "prompt-overflow-only-fails-inside-vllm",
+    "title": "Very long cases fail inside vLLM with a decoder prompt length error instead of a preflight budget check",
+    "description": "When long mixed-corpus cases run, the process can spend a few minutes preparing stage prompts and then die with a ValueError similar to 'decoder prompt length 11404 is longer than maximum model length 8192'. The failure currently arrives from the model backend instead of being caught earlier with a clearer message.",
+    "expected_behavior": "The runtime should detect prompt length pressure with the tokenizer before handing an impossible request to vLLM.",
+    "log_excerpt": "ValueError: decoder prompt length 11404 is longer than max model length 8192",
+    "stacktrace_excerpt": "File \"structured_agent/engine.py\", line 83, in _generate_once",
+    "repo_subpaths": [
+      "structured_agent"
+    ],
+    "gold_primary_file": "structured_agent/engine.py",
+    "gold_root_cause_category": "configuration",
+    "gold_evidence_labels": [
+      "preflight_guard_missing"
+    ]
+  },
+  {
+    "issue_id": "cjk-token-estimate-under-shoots-threshold",
+    "title": "Compression sometimes does not trigger for CJK-heavy history because the fallback token estimate is too optimistic",
+    "description": "Several long Chinese or mixed-language cases look comfortably below the 4k trigger when we use the rough estimate, but the real tokenizer count is much higher. That means compressed-history skips compression until it is already too late or never activates on the intended stage boundary.",
+    "expected_behavior": "Fallback token estimation should be conservative enough that multilingual text does not badly undershoot the real tokenizer length.",
+    "log_excerpt": "history estimate=3960, real tokenizer count≈8100, compression skipped",
+    "stacktrace_excerpt": "File \"structured_agent/utils.py\", line 142, in count_tokens_simple",
+    "repo_subpaths": [
+      "structured_agent"
+    ],
+    "gold_primary_file": "structured_agent/utils.py",
+    "gold_root_cause_category": "configuration",
+    "gold_evidence_labels": [
+      "heuristic_underestimate"
+    ]
+  }
+]

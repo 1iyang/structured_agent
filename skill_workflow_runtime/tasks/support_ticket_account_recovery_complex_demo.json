@@ -1,0 +1,7 @@
+{
+  "ticket_id": "support-realistic-demo-002",
+  "customer_message": "Our admin team lost access after the SSO certificate rotation and we need to restore login for the finance group today.",
+  "account_context": "Enterprise tenant. Recent certificate rotation completed 3 hours ago. Tenant-wide access impact confirmed by account notes.",
+  "source_pack": "Policy excerpt: Tenant-wide identity incidents require specialist review before any irreversible authentication change. Policy excerpt: Identity verification must be completed with the requesting admin before account recovery actions are taken. Guidance: acknowledge urgency, avoid promising immediate restoration, and hand off with the exact verification checkpoint."
+}
+

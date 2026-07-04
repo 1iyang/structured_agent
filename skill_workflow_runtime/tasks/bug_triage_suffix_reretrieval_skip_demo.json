@@ -1,0 +1,45 @@
+{
+  "task_id": "bug-reretrieval-demo-002",
+  "title": "Truncated JSON recovery points directly at the shared helper",
+  "description": "The initial evidence pool already includes the shared recovery helper, so the strategy plugin should keep the suffix re-retrieval subloop closed.",
+  "expected_behavior": "The workflow should stay on the base evidence path and still choose app/utils.py without reopening retrieval.",
+  "log_excerpt": "ParseError raised after fallback path. recover_truncated_json is named directly in the handler notes.",
+  "stacktrace_excerpt": "Traceback excerpt: in recover_truncated_json at app/utils.py",
+  "repo_subpaths": [],
+  "repository_artifacts": [
+    {
+      "path": "app/utils.py",
+      "snippet": "recover_truncated_json shared helper repairs truncated payloads and controls the final retry behavior",
+      "tags": [
+        "local_repo_search",
+        "shared_helper"
+      ]
+    },
+    {
+      "path": "app/request/handler.py",
+      "snippet": "handler catches ParseError and delegates to recover_truncated_json before responding",
+      "tags": [
+        "local_repo_search",
+        "handler"
+      ]
+    }
+  ],
+  "followup_repository_artifacts": [
+    {
+      "path": "app/utils.py",
+      "snippet": "recover_truncated_json shared helper repairs truncated payloads and controls the final retry behavior",
+      "tags": [
+        "local_repo_search",
+        "shared_helper"
+      ]
+    },
+    {
+      "path": "app/request/handler.py",
+      "snippet": "handler catches ParseError and delegates to recover_truncated_json before responding",
+      "tags": [
+        "local_repo_search",
+        "handler"
+      ]
+    }
+  ]
+}

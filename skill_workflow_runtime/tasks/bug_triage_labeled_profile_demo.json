@@ -1,0 +1,32 @@
+{
+  "issue_id": "bug-labeled-demo-001",
+  "title": "Structured JSON output is truncated at the tail",
+  "description": "Long structured generations sometimes end with a dangling comma or partial object, and downstream parsing fails during final recovery.",
+  "expected_behavior": "The workflow should recover a valid JSON prefix or retry cleanly.",
+  "log_excerpt": "JSONDecodeError: Expecting property name enclosed in double quotes near char 3187",
+  "stacktrace_excerpt": "File \"app/engine.py\", line 83, in generate_json\n  parsed = safe_json_loads(raw_text)\nFile \"app/utils.py\", line 141, in safe_json_loads\n  raise JSONDecodeError(...)",
+  "repository_artifacts": [
+    {
+      "path": "app/engine.py",
+      "snippet": "generate_json calls safe_json_loads after collecting the raw text payload.",
+      "tags": ["runtime", "json", "callsite"]
+    },
+    {
+      "path": "app/utils.py",
+      "snippet": "safe_json_loads attempts conservative recovery for partial JSON tails and strips dangling commas before parsing.",
+      "tags": ["json", "helper", "recovery"]
+    },
+    {
+      "path": "app/reporting.py",
+      "snippet": "reporting utilities format workflow summaries for dashboards and alerting sinks.",
+      "tags": ["report", "summary"]
+    },
+    {
+      "path": "app/config.py",
+      "snippet": "runtime configuration toggles affect generation budgets but do not parse JSON payloads.",
+      "tags": ["config", "limits"]
+    }
+  ],
+  "gold_primary_file": "app/utils.py",
+  "gold_root_cause_category": "error_recovery"
+}
